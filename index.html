@@ -4,18 +4,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FROST</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
-</head>
-  <body class="bg-[#050505] text-white overflow-hidden">
-    <div id="root"></div>
+    <style>
+      :root {
+        --bg: #050505;
+        --stroke: #eaeaea;
+        --neon: #00d4ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        color: var(--stroke);
+        font-family: "Eurostile", "Orbitron", "Rajdhani", "Montserrat", sans-serif;
+      }
+
+      .stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        text-align: center;
+      }
+
+      svg {
+        width: min(82vw, 760px);
+        height: auto;
+      }
+
+      .logo-path {
+        fill: none;
+        stroke: var(--stroke);
+        stroke-width: 6;
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: draw 2.5s ease forwards;
+      }
+
+      .logo-shard {
+        fill: none;
+        stroke: var(--neon);
+        stroke-width: 6;
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+        animation:
+          draw 2.5s ease forwards,
+          glow 2s ease-in-out 2.5s infinite;
+      }
+
+      .download-btn {
+        opacity: 0;
+        transform: translateY(18px);
+        padding: 14px 40px;
+        border: 2px solid var(--neon);
+        background: transparent;
+        color: #ffffff;
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        animation: reveal 0.7s ease forwards;
+        animation-delay: 2.8s;
+      }
+
+      .download-btn:hover {
+        background: var(--neon);
+        color: #050505;
+        box-shadow: 0 0 18px rgba(0, 212, 255, 0.9), 0 0 38px rgba(0, 212, 255, 0.6);
+      }
+
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 2px rgba(0, 212, 255, 0.4))
+            drop-shadow(0 0 6px rgba(0, 212, 255, 0.3));
+        }
+        50% {
+          filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.9))
+            drop-shadow(0 0 12px rgba(0, 212, 255, 0.7));
+        }
+      }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .stage {
+          gap: 20px;
+        }
+
+        .download-btn {
+          padding: 12px 30px;
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <svg viewBox="0 0 820 160" role="img" aria-label="FROST logo">
+        <g>
+          <path
+            class="logo-path"
+            d="M40 30 H130 M40 30 V130 M40 80 H110"
+          />
+          <path
+            class="logo-path"
+            d="M170 130 V30 H250 V70 H210 V95 H240 L260 130"
+          />
+          <path
+            class="logo-path"
+            d="M300 30 H390 V130 H300 Z"
+          />
+          <path
+            class="logo-path"
+            d="M430 40 H520 V75 H460 V95 H520 V130 H430"
+          />
+          <path
+            class="logo-path"
+            d="M560 30 H660 M610 30 V130"
+          />
+          <path
+            class="logo-shard"
+            d="M690 40 L760 20 L740 80 L790 110 L720 120 L700 150 L680 90 Z"
+          />
+        </g>
+      </svg>
+      <a class="download-btn" href="#">Download</a>
+    </div>
   </body>
 </html>
